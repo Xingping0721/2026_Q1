@@ -22,6 +22,8 @@ P = tf([1], [Ke*Tm*Te, Ke*Tm, Ke, 0]);
 
 % Simulation setting
 t = [0 : 0.00001 : 1];
+% t = [0 : 0.00001 : 1];
+
 
 % Set a P-controller
 Kc = 80.92;  %% when Kc gain is this balue, output is pure oscillation
