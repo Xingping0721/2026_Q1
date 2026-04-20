@@ -39,12 +39,12 @@ G1 = feedback(C1*P, 1);
 % Simulation
 Y_G1_X1 = lsim(G1, X1, t);
 
-% % Plot for x = 1
-% figure(1);
-% plot(t, Y_G1_X1, 'r-');
-% xlim([0, 1.0]);
-% ylim([0, 2.1]);
-% title('DC motor angular position for finding unlimate gain');
+% Plot for x = 1
+figure(1);
+plot(t, Y_G1_X1, 'r-');
+xlim([0, 1.0]);
+ylim([0, 2.1]);
+title('DC motor angular position for finding unlimate gain');
 
 % Designed P, PI, PD, PID controllers
 % Designed P controller
@@ -57,7 +57,8 @@ Y_G2_X1 = lsim(G2, X1, t);
 
 % Designed PI controller
 Kp = 0.45 * Kc; 
-C3 = Kp * (1 + 1/(0.83 * Tc * s));
+% C3 = Kp * (1 + 1/(0.83 * Tc * s));
+C3 = Kp * (1 + 1/(100 * Tc * s));  %% I modify it
 % Whole system
 G3 = feedback(C3*P, 1);
 % Simulation
@@ -93,4 +94,4 @@ plot(t, Y_G2_X1, 'r-', ...
      t, Y_G3_X1, 'g-', ...
      t, Y_G5_X1, 'k-');
 legend('P', 'PI', 'PID');
-title('PID tuning by ultimate gain method'); %% PIだけ発散する
+title('PID tuning by ultimate gain method');

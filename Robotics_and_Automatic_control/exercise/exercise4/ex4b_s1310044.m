@@ -33,8 +33,8 @@ xlim([0, 0.1]); ylim([0, 100]);
 title('DC motor angular position for process reaction');
 
 % Read a slope R and a corssing point L from a plot
-R = 1538;
-L = 0.005;
+R = 1602.5981; %% modify
+L = 0.008608;  %% modify
 
 % Designed P, PI, PID controllers
 % Designed P controller
