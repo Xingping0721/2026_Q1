@@ -7,12 +7,22 @@
 % Symbol
 s = tf('s');
 % Motor parameres
-R = 2.61;
-L = 0.02 * 1E-3;
-Jm = 0.014 * 1E-7;
-Ki = 15400/60*2*pi;
+% R = 2.61;
+% L = 0.02 * 1E-3;
+% Jm = 0.014 * 1E-7;
+% Ki = 15400/60*2*pi;
+% Ke = 1/Ki;
+% Kt = 0.657 * 1E-3;
+% Tm = ( R * Jm ) / ( Ke * Kt ) ;
+% Te = L/R;
+
+
+R = 37.5;
+L = 0.29 * 1E-3;
+Jm = 0.015 * 1E-7;
+Ki = 3840/60*2*pi;
 Ke = 1/Ki;
-Kt = 0.657 * 1E-3;
+Kt = 2.63 * 1E-3;
 Tm = ( R * Jm ) / ( Ke * Kt ) ;
 Te = L/R;
 
@@ -21,8 +31,7 @@ P = tf( [ 1 ] , [ Ke*Tm*Te, Ke*Tm, Ke, 0 ] );
 
 % Define a time period and a reference
 t = [ 0:0.001:1 ];
-r = 300 * sin( 2*pi*t );
-% C = 0.001 + 0.001/s + 0.001*s;
+r = 300 * sin( 500000000*t );
 C = 1 + 1/s + 1*s;
 G = feedback( C*P, 1 );
 Y = lsim( G, r, t );
