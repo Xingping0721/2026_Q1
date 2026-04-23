@@ -8,14 +8,24 @@
 s = tf('s');
 
 % Motor parameres
-R = 2.61;
-L = 0.02 * 1E-3;
-Jm = 0.014 * 1E-7;
-Ki = 15400/60*2*pi;
+% R = 2.61;
+% L = 0.02 * 1E-3;
+% Jm = 0.014 * 1E-7;
+% Ki = 15400/60*2*pi;
+% Ke = 1/Ki;
+% Kt = 0.657 * 1E-3;
+% Tm = ( R * Jm ) / ( Ke * Kt ) ;
+% Te = L/R;
+
+R = 37.5;
+L = 0.29 * 1E-3;
+Jm = 0.015 * 1E-7;
+Ki = 3840/60*2*pi;
 Ke = 1/Ki;
-Kt = 0.657 * 1E-3;
+Kt = 2.63 * 1E-3;
 Tm = ( R * Jm ) / ( Ke * Kt ) ;
 Te = L/R;
+
 
 % Set a plant of DC motor position as transfer function
 P = tf([1], [Ke*Tm*Te, Ke*Tm, Ke, 0]);
@@ -26,9 +36,9 @@ t = [0 : 0.00001 : 1];
 
 
 % Set a P-controller
-Kc = 80.92;  %% when Kc gain is this balue, output is pure oscillation
+Kc = 321.575;  %% when Kc gain is this balue, output is pure oscillation
 C1 = Kc;
-Tc = 0.00167; %% this is the period
+Tc = 0.00162; %% this is the period
 
 % Set a reference as 1
 X1 = 1 * ones(size(t));

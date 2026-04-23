@@ -5,14 +5,26 @@
 %
 s = tf('s');
 % Motor parameres
-R = 2.61;
-L = 0.02 * 1E-3;
-Jm = 0.014 * 1E-7;
-Ki = 15400/60*2*pi;
+% R = 2.61;
+% L = 0.02 * 1E-3;
+% Jm = 0.014 * 1E-7;
+% Ki = 15400/60*2*pi;
+% Ke = 1/Ki;
+% Kt = 0.657 * 1E-3;
+% Tm = ( R * Jm ) / ( Ke * Kt ) ;
+% Te = L/R;
+
+
+R = 37.5;
+L = 0.29 * 1E-3;
+Jm = 0.015 * 1E-7;
+Ki = 3840/60*2*pi;
 Ke = 1/Ki;
-Kt = 0.657 * 1E-3;
+Kt = 2.63 * 1E-3;
 Tm = ( R * Jm ) / ( Ke * Kt ) ;
 Te = L/R;
+
+
 
 % Set a plant of DC motor position as transfer function
 P = tf([1], [Ke*Tm*Te, Ke*Tm, Ke, 0]);
@@ -33,8 +45,8 @@ xlim([0, 0.1]); ylim([0, 100]);
 title('DC motor angular position for process reaction');
 
 % Read a slope R and a corssing point L from a plot
-R = 1602.5981; %% modify
-L = 0.008608;  %% modify
+R = 402.12; %% modify
+L = 0.0086;  %% modify
 
 % Designed P, PI, PID controllers
 % Designed P controller
