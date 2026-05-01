@@ -1,0 +1,60 @@
+%   C-space: list of x, y coordinate of collision points
+%   Initialized with empty vector
+vXCspace = []; 
+vYCspace = [];
+%   Loop for x cooridnate
+for dX = 0.0 : 0.1 : 10.0
+%   Loop for y cooridnate, from 0 to 8 step 0.1
+    for dY = 0.0 : 0.1 : 10.0
+        % If collision, put dX and dY to C-space list
+        if 1 == collision_check_circle_robot(dX, dY)
+            vXCspace = [vXCspace, dX]; 
+            vYCspace = [vYCspace, dY];
+        end
+    end
+end
+
+% plot as scatter
+figure(1);
+scatter(vXCspace,vYCspace);
+
+function d = collision_check_circle_robot(dX, dY)
+    %   Output: 0 if it is in a free area
+    %           1 if it collides with an obstacle
+    %   Input: dX, x-coordinate
+    %          dY, y-coordinate
+    %   Constant: R = 0.5, radius of a circular robot 
+    %             dR = 0.1, step size for a radius [m]
+    %             dQ = 10,  step size for an angle [deg]
+    
+    %   Robot radius and step size
+    R = 0.5; dR = 0.1;
+    %   Angle step size
+    dQ = 10;
+    %   loop for angle, from 0 to 360 step 10 [degree]
+    for q = 0 : dQ : 360 - dQ
+        % loop for radius
+        for r = dR : dR : R
+            % make a internal point of circlular robot
+            x = r * cos( deg2rad(q) ) + dX;
+            y = r * sin( deg2rad(q) ) + dY;
+            % Collision with walls
+            if (x < 0.0) || (10.0 < x) || (y < 0.0) || (10.0 < y)
+                d = 1;
+                return;
+            end
+            % collision check for the first obstacle
+            if (x < 7.0) && (2 * y <  x + 5) && (y > 4)
+                d = 1;
+                return;
+            end
+            % collision check for the second obstacle
+            % if (4.0 < x) && (x < 5.0) && (3.0 < y) && (y < 5.0)
+            %     d = 1;
+            %     return;
+            % end
+        end
+    end
+    % No collision with any obstacle, return value 0 (free = no collision) 
+    d = 0;
+end
